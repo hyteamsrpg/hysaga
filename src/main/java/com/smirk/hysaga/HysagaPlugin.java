@@ -1,4 +1,4 @@
-package com.example.templateplugin;
+package com.smirk.hysaga;
 
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
@@ -11,17 +11,17 @@ import java.util.logging.Level;
  *
  * TODO: Implement your plugin logic here.
  *
- * @author YourName
- * @version 1.0.0
+ * @author smirk
+ * @version 0.0.1
  */
-public class TemplatePlugin extends JavaPlugin {
+public class HysagaPlugin extends JavaPlugin {
 
-    private static TemplatePlugin instance;
+    private static HysagaPlugin instance;
 
     /**
      * Constructor - Called when plugin is loaded.
      */
-    public TemplatePlugin(@Nonnull JavaPluginInit init) {
+    public HysagaPlugin(@Nonnull JavaPluginInit init) {
         super(init);
         instance = this;
         getLogger().at(Level.INFO).log("[TemplatePlugin] Plugin loaded!");
@@ -30,7 +30,7 @@ public class TemplatePlugin extends JavaPlugin {
     /**
      * Get plugin instance.
      */
-    public static TemplatePlugin getInstance() {
+    public static HysagaPlugin getInstance() {
         return instance;
     }
 

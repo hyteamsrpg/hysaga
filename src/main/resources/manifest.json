@@ -1,11 +1,11 @@
 {
-    "Group": "Example",
-    "Name": "ExamplePlugin",
-    "Version": "0.0.2",
-    "Description": "An example plugin for HyTale!",
+    "Group": "smirk",
+    "Name": "Hysaga",
+    "Version": "0.0.1",
+    "Description": "RPG Plugin",
     "Authors": [
         {
-            "Name": "It's you!"
+            "Name": "smirk"
         }
     ],
     "Website": "example.org",
@@ -17,6 +17,6 @@
         
     },
     "DisabledByDefault": false,
-    "Main": "org.example.plugin.ExamplePlugin",
+    "Main": "org.smirk.plugin.hysaga",
     "IncludesAssetPack": true
 }
