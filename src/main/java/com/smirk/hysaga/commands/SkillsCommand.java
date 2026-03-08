@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.smirk.hysaga.config.SkillsConfig;
 import com.smirk.hysaga.data.PlayerDataManager;
 import com.smirk.hysaga.data.model.PlayerData;
 import com.smirk.hysaga.ui.SkillsPage;
@@ -21,10 +22,12 @@ import java.util.concurrent.CompletableFuture;
 public class SkillsCommand extends AbstractPlayerCommand {
 
     private final PlayerDataManager playerDataManager;
+    private final SkillsConfig skillsConfig;
 
-    public SkillsCommand(String pluginName, String pluginVersion, PlayerDataManager playerDataManager) {
+    public SkillsCommand(String pluginName, String pluginVersion, PlayerDataManager playerDataManager, SkillsConfig skillsConfig) {
         super("skills", "Open skill allocation page from " + pluginName + " version " + pluginVersion);
         this.playerDataManager = playerDataManager;
+        this.skillsConfig = skillsConfig;
         this.setPermissionGroup(GameMode.Adventure);
     }
 
@@ -47,7 +50,7 @@ public class SkillsCommand extends AbstractPlayerCommand {
         PlayerData finalData = data;
 
         CompletableFuture.runAsync(() -> {
-            player.getPageManager().openCustomPage(ref, store, new SkillsPage(playerRef, finalData));
+            player.getPageManager().openCustomPage(ref, store, new SkillsPage(playerRef, finalData, skillsConfig));
         }, world);
     }
 }

@@ -8,8 +8,10 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.smirk.hysaga.commands.ShowHudCommand;
 import com.smirk.hysaga.commands.ShowPageCommand;
 import com.smirk.hysaga.commands.SkillsCommand;
+import com.smirk.hysaga.config.SkillsConfig;
 import com.smirk.hysaga.data.PlayerDataManager;
 import com.smirk.hysaga.data.model.PlayerData;
+import com.smirk.hysaga.storage.JsonStorageManager;
 import com.smirk.hysaga.storage.StoragePaths;
 
 import javax.annotation.Nonnull;
@@ -27,6 +29,7 @@ public class Hysaga extends JavaPlugin {
 
     private StoragePaths storagePaths;
     private PlayerDataManager playerDataManager;
+    private SkillsConfig skillsConfig;
 
     public Hysaga(@Nonnull JavaPluginInit init) {
         super(init);
@@ -45,6 +48,7 @@ public class Hysaga extends JavaPlugin {
         Path dataDir = Path.of("plugins", "hysaga");
         this.storagePaths = new StoragePaths(dataDir);
         this.playerDataManager = new PlayerDataManager(storagePaths);
+        this.skillsConfig = loadSkillsConfig();
 
         registerEvents();
         registerCommands();
@@ -91,12 +95,32 @@ public class Hysaga extends JavaPlugin {
 
     private void registerCommands() {
         this.getCommandRegistry().registerCommand(
-                new SkillsCommand(this.getName(), this.getManifest().getVersion().toString(), playerDataManager));
+                new SkillsCommand(this.getName(), this.getManifest().getVersion().toString(), playerDataManager, skillsConfig));
         this.getCommandRegistry().registerCommand(new ShowPageCommand());
         this.getCommandRegistry().registerCommand(new ShowHudCommand());
     }
 
+    private SkillsConfig loadSkillsConfig() {
+        JsonStorageManager storage = JsonStorageManager.getInstance();
+        try {
+            SkillsConfig config = storage.read(storagePaths.getSkillsConfigFile(), SkillsConfig.class);
+            if (config == null) {
+                config = new SkillsConfig();
+                storage.writeAtomic(storagePaths.getSkillsConfigFile(), config);
+                getLogger().at(Level.INFO).log("[Hysaga] Created default skills config");
+            }
+            return config;
+        } catch (Exception e) {
+            getLogger().at(Level.WARNING).log("[Hysaga] Failed to load skills config, using defaults");
+            return new SkillsConfig();
+        }
+    }
+
     public PlayerDataManager getPlayerDataManager() {
         return playerDataManager;
+    }
+
+    public SkillsConfig getSkillsConfig() {
+        return skillsConfig;
     }
 }

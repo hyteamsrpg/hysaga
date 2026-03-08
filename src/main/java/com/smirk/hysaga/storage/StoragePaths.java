@@ -16,4 +16,12 @@ public record StoragePaths(Path pathDir) {
     public Path getPlayerDataFile(UUID playerId) {
         return getPlayersDir().resolve(playerId.toString() + ".json");
     }
+
+    public Path getConfigDir() {
+        return this.pathDir.resolve("config");
+    }
+
+    public Path getSkillsConfigFile() {
+        return getConfigDir().resolve("skills.json");
+    }
 }

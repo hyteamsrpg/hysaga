@@ -5,13 +5,20 @@ $Common = "Common.ui";
 @SeparatorColor = #a6afba(0.20);
 @AccentColor = #a27e39;
 @BtnBg = #2b3542;
+@TrackBg = #0a0e12(0.75);
+
+@StrColor = #e87461;
+@DexColor = #e8d44d;
+@DefColor = #d4d4d4;
+@AgiColor = #5cb85c;
+@IntColor = #5b9bd5;
 
 Group {
   LayoutMode: Center;
 
   Group #SkillsPanel {
     Background: @PanelBg;
-    Anchor: (Width: 480, Height: 560);
+    Anchor: (Width: 520, Height: 560);
     LayoutMode: Top;
     Padding: (Horizontal: 24, Top: 16, Bottom: 16);
 
@@ -44,20 +51,25 @@ Group {
     }
 
     Group #StrengthRow {
-      Anchor: (Height: 40, Top: 10);
+      Anchor: (Height: 44, Top: 10);
       LayoutMode: Left;
       Background: @RowBg;
-      Padding: (Horizontal: 12, Vertical: 4);
+      Padding: (Horizontal: 10, Vertical: 4);
 
       Label {
-        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
-        Anchor: (Width: 180);
+        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @StrColor);
+        Anchor: (Width: 120);
         Text: "Strength";
       }
 
+      Group #StrengthTrack {
+        Anchor: (Width: 200, Height: 12);
+        Background: @TrackBg;
+      }
+
       Label #StrengthValue {
-        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
-        Anchor: (Width: 60);
+        Style: (FontSize: 15, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @StrColor);
+        Anchor: (Width: 50);
         Text: "1";
       }
 
@@ -83,20 +95,25 @@ Group {
     }
 
     Group #DexterityRow {
-      Anchor: (Height: 40, Top: 6);
+      Anchor: (Height: 44, Top: 6);
       LayoutMode: Left;
       Background: @RowBg;
-      Padding: (Horizontal: 12, Vertical: 4);
+      Padding: (Horizontal: 10, Vertical: 4);
 
       Label {
-        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
-        Anchor: (Width: 180);
+        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @DexColor);
+        Anchor: (Width: 120);
         Text: "Dexterity";
       }
 
+      Group #DexterityTrack {
+        Anchor: (Width: 200, Height: 12);
+        Background: @TrackBg;
+      }
+
       Label #DexterityValue {
-        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
-        Anchor: (Width: 60);
+        Style: (FontSize: 15, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @DexColor);
+        Anchor: (Width: 50);
         Text: "1";
       }
 
@@ -122,20 +139,25 @@ Group {
     }
 
     Group #AgilityRow {
-      Anchor: (Height: 40, Top: 6);
+      Anchor: (Height: 44, Top: 6);
       LayoutMode: Left;
       Background: @RowBg;
-      Padding: (Horizontal: 12, Vertical: 4);
+      Padding: (Horizontal: 10, Vertical: 4);
 
       Label {
-        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
-        Anchor: (Width: 180);
+        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @AgiColor);
+        Anchor: (Width: 120);
         Text: "Agility";
       }
 
+      Group #AgilityTrack {
+        Anchor: (Width: 200, Height: 12);
+        Background: @TrackBg;
+      }
+
       Label #AgilityValue {
-        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
-        Anchor: (Width: 60);
+        Style: (FontSize: 15, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @AgiColor);
+        Anchor: (Width: 50);
         Text: "1";
       }
 
@@ -161,20 +183,25 @@ Group {
     }
 
     Group #IntelligenceRow {
-      Anchor: (Height: 40, Top: 6);
+      Anchor: (Height: 44, Top: 6);
       LayoutMode: Left;
       Background: @RowBg;
-      Padding: (Horizontal: 12, Vertical: 4);
+      Padding: (Horizontal: 10, Vertical: 4);
 
       Label {
-        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
-        Anchor: (Width: 180);
+        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @IntColor);
+        Anchor: (Width: 120);
         Text: "Intelligence";
       }
 
+      Group #IntelligenceTrack {
+        Anchor: (Width: 200, Height: 12);
+        Background: @TrackBg;
+      }
+
       Label #IntelligenceValue {
-        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
-        Anchor: (Width: 60);
+        Style: (FontSize: 15, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @IntColor);
+        Anchor: (Width: 50);
         Text: "1";
       }
 
@@ -200,20 +227,25 @@ Group {
     }
 
     Group #DefenseRow {
-      Anchor: (Height: 40, Top: 6);
+      Anchor: (Height: 44, Top: 6);
       LayoutMode: Left;
       Background: @RowBg;
-      Padding: (Horizontal: 12, Vertical: 4);
+      Padding: (Horizontal: 10, Vertical: 4);
 
       Label {
-        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
-        Anchor: (Width: 180);
+        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @DefColor);
+        Anchor: (Width: 120);
         Text: "Defense";
       }
 
+      Group #DefenseTrack {
+        Anchor: (Width: 200, Height: 12);
+        Background: @TrackBg;
+      }
+
       Label #DefenseValue {
-        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
-        Anchor: (Width: 60);
+        Style: (FontSize: 15, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @DefColor);
+        Anchor: (Width: 50);
         Text: "1";
       }
 
