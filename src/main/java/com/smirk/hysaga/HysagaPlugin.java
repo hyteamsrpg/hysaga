@@ -2,6 +2,8 @@ package com.smirk.hysaga;
 
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import org.example.plugin.ExampleCommand;
+import org.example.plugin.SkillsCommand;
 
 import javax.annotation.Nonnull;
 import java.util.logging.Level;
@@ -39,7 +41,7 @@ public class HysagaPlugin extends JavaPlugin {
      */
     @Override
     protected void setup() {
-        getLogger().at(Level.INFO).log("[TemplatePlugin] Plugin setup!");
+        getLogger().at(Level.INFO).log("[Hysaga] Plugin setup!");
 
         // TODO: Initialize your plugin here
         // - Load configuration
@@ -55,7 +57,10 @@ public class HysagaPlugin extends JavaPlugin {
      */
     @Override
     protected void start() {
-        getLogger().at(Level.INFO).log("[TemplatePlugin] Plugin enabled!");
+        getLogger().at(Level.INFO).log("[Hysaga] Plugin enabled!");
+
+
+
     }
 
     /**
@@ -63,7 +68,7 @@ public class HysagaPlugin extends JavaPlugin {
      */
     @Override
     public void shutdown() {
-        getLogger().at(Level.INFO).log("[TemplatePlugin] Plugin disabled!");
+        getLogger().at(Level.INFO).log("[Hysaga] Plugin disabled!");
 
         // TODO: Cleanup your plugin here
         // - Save data
@@ -72,7 +77,7 @@ public class HysagaPlugin extends JavaPlugin {
     }
 
     /**
-     * Register your commands here.
+     * Register your events here.
      */
     private void registerEvents() {
 
@@ -82,6 +87,7 @@ public class HysagaPlugin extends JavaPlugin {
      * Register your commands here.
      */
     private void registerCommands() {
+        this.getCommandRegistry().registerCommand(new SkillsCommand(this.getName(), this.getManifest().getVersion().toString()));
 
     }
 
