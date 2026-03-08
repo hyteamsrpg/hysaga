@@ -17,6 +17,6 @@
         
     },
     "DisabledByDefault": false,
-    "Main": "org.smirk.plugin.hysaga",
+    "Main": "com.smirk.hysaga.Hysaga",
     "IncludesAssetPack": true
 }

@@ -5,6 +5,8 @@ import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.smirk.hysaga.commands.ShowHudCommand;
+import com.smirk.hysaga.commands.ShowPageCommand;
 import com.smirk.hysaga.commands.SkillsCommand;
 import com.smirk.hysaga.data.PlayerDataManager;
 import com.smirk.hysaga.data.model.PlayerData;
@@ -19,20 +21,20 @@ import java.util.logging.Level;
  * @author smirk
  * @version 0.0.1
  */
-public class HysagaPlugin extends JavaPlugin {
+public class Hysaga extends JavaPlugin {
 
-    private static HysagaPlugin instance;
+    private static Hysaga instance;
 
     private StoragePaths storagePaths;
     private PlayerDataManager playerDataManager;
 
-    public HysagaPlugin(@Nonnull JavaPluginInit init) {
+    public Hysaga(@Nonnull JavaPluginInit init) {
         super(init);
         instance = this;
         getLogger().at(Level.INFO).log("[Hysaga] Plugin loaded!");
     }
 
-    public static HysagaPlugin getInstance() {
+    public static Hysaga getInstance() {
         return instance;
     }
 
@@ -90,6 +92,8 @@ public class HysagaPlugin extends JavaPlugin {
     private void registerCommands() {
         this.getCommandRegistry().registerCommand(
                 new SkillsCommand(this.getName(), this.getManifest().getVersion().toString(), playerDataManager));
+        this.getCommandRegistry().registerCommand(new ShowPageCommand());
+        this.getCommandRegistry().registerCommand(new ShowHudCommand());
     }
 
     public PlayerDataManager getPlayerDataManager() {

@@ -128,14 +128,25 @@ if (hasHytaleHome) {
 
     tasks.register('runServerJar', JavaExec) {
         dependsOn shadowJarTask
+
         mainClass = 'com.hypixel.hytale.Main'
         classpath = files(serverJar)
         workingDir = serverRunDir.absolutePath
+
         doFirst {
-            def modPaths = [shadowJarTask.get().archiveFile.get().asFile.absolutePath]
+            def devModsDir = file("$buildDir/hytale-mods")
+            devModsDir.mkdirs()
+
+            copy {
+                from shadowJarTask.get().archiveFile.get().asFile
+                into devModsDir
+            }
+
+            def modPaths = [devModsDir.absolutePath]
             if (load_user_mods.toBoolean()) {
                 modPaths << "${hytaleHome}/UserData/Mods"
             }
+
             setArgs([
                     '--allow-op',
                     '--disable-sentry',
