@@ -6,24 +6,24 @@ import com.hypixel.hytale.protocol.GameMode;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.smirk.hysaga.data.PlayerDataManager;
 import com.smirk.hysaga.data.model.PlayerData;
+import com.smirk.hysaga.ui.SkillsPage;
 
 import java.awt.*;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
-/**
- * Open Skills GUI
- */
 public class SkillsCommand extends AbstractPlayerCommand {
 
     private final PlayerDataManager playerDataManager;
 
     public SkillsCommand(String pluginName, String pluginVersion, PlayerDataManager playerDataManager) {
-        super("skills", "View your skills from " + pluginName + " version " + pluginVersion);
+        super("skills", "Open skill allocation page from " + pluginName + " version " + pluginVersion);
         this.playerDataManager = playerDataManager;
         this.setPermissionGroup(GameMode.Adventure);
     }
@@ -43,16 +43,11 @@ public class SkillsCommand extends AbstractPlayerCommand {
             return;
         }
 
-        ctx.sendMessage(Message.raw("--- Skills (Lv." + data.getLevel() + " | " + data.getExp() + " XP) ---").color(Color.YELLOW));
-        ctx.sendMessage(Message.raw("  Strength:     " + data.getStrength()).color(Color.WHITE));
-        ctx.sendMessage(Message.raw("  Dexterity:    " + data.getDexterity()).color(Color.WHITE));
-        ctx.sendMessage(Message.raw("  Agility:      " + data.getAgility()).color(Color.WHITE));
-        ctx.sendMessage(Message.raw("  Intelligence: " + data.getIntelligence()).color(Color.WHITE));
+        Player player = ctx.senderAs(Player.class);
+        PlayerData finalData = data;
 
-        if (data.getAbilities() != null && !data.getAbilities().isEmpty()) {
-            ctx.sendMessage(Message.raw("  Abilities:    " + String.join(", ", data.getAbilities())).color(Color.CYAN));
-        } else {
-            ctx.sendMessage(Message.raw("  Abilities:    None").color(Color.GRAY));
-        }
+        CompletableFuture.runAsync(() -> {
+            player.getPageManager().openCustomPage(ref, store, new SkillsPage(playerRef, finalData));
+        }, world);
     }
 }

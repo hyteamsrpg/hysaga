@@ -1,0 +1,258 @@
+$Common = "Common.ui";
+
+@PanelBg = PatchStyle(TexturePath: "MyBackground.png");
+@RowBg = #1a2530;
+@SeparatorColor = #a6afba(0.20);
+@AccentColor = #a27e39;
+@BtnBg = #2b3542;
+
+Group {
+  LayoutMode: Center;
+
+  Group #SkillsPanel {
+    Background: @PanelBg;
+    Anchor: (Width: 480, Height: 560);
+    LayoutMode: Top;
+    Padding: (Horizontal: 24, Top: 16, Bottom: 16);
+
+    Label #Title {
+      Style: (FontSize: 24, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #c2d3de);
+      Anchor: (Top: 8);
+      Text: "Skill Allocation";
+    }
+
+    Group {
+      Anchor: (Height: 2, Top: 8);
+      Background: @AccentColor;
+    }
+
+    Label #LevelInfo {
+      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #96a9be);
+      Anchor: (Top: 8);
+      Text: "Level 1 | 0 XP";
+    }
+
+    Label #AvailablePoints {
+      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, TextColor: #a27e39);
+      Anchor: (Top: 4);
+      Text: "Available Points: 0";
+    }
+
+    Group {
+      Anchor: (Height: 1, Top: 10);
+      Background: @SeparatorColor;
+    }
+
+    Group #StrengthRow {
+      Anchor: (Height: 40, Top: 10);
+      LayoutMode: Left;
+      Background: @RowBg;
+      Padding: (Horizontal: 12, Vertical: 4);
+
+      Label {
+        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
+        Anchor: (Width: 180);
+        Text: "Strength";
+      }
+
+      Label #StrengthValue {
+        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
+        Anchor: (Width: 60);
+        Text: "1";
+      }
+
+      Group #StrengthMinus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "-";
+        }
+      }
+
+      Group #StrengthPlus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "+";
+        }
+      }
+    }
+
+    Group #DexterityRow {
+      Anchor: (Height: 40, Top: 6);
+      LayoutMode: Left;
+      Background: @RowBg;
+      Padding: (Horizontal: 12, Vertical: 4);
+
+      Label {
+        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
+        Anchor: (Width: 180);
+        Text: "Dexterity";
+      }
+
+      Label #DexterityValue {
+        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
+        Anchor: (Width: 60);
+        Text: "1";
+      }
+
+      Group #DexterityMinus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "-";
+        }
+      }
+
+      Group #DexterityPlus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "+";
+        }
+      }
+    }
+
+    Group #AgilityRow {
+      Anchor: (Height: 40, Top: 6);
+      LayoutMode: Left;
+      Background: @RowBg;
+      Padding: (Horizontal: 12, Vertical: 4);
+
+      Label {
+        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
+        Anchor: (Width: 180);
+        Text: "Agility";
+      }
+
+      Label #AgilityValue {
+        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
+        Anchor: (Width: 60);
+        Text: "1";
+      }
+
+      Group #AgilityMinus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "-";
+        }
+      }
+
+      Group #AgilityPlus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "+";
+        }
+      }
+    }
+
+    Group #IntelligenceRow {
+      Anchor: (Height: 40, Top: 6);
+      LayoutMode: Left;
+      Background: @RowBg;
+      Padding: (Horizontal: 12, Vertical: 4);
+
+      Label {
+        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
+        Anchor: (Width: 180);
+        Text: "Intelligence";
+      }
+
+      Label #IntelligenceValue {
+        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
+        Anchor: (Width: 60);
+        Text: "1";
+      }
+
+      Group #IntelligenceMinus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "-";
+        }
+      }
+
+      Group #IntelligencePlus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "+";
+        }
+      }
+    }
+
+    Group #DefenseRow {
+      Anchor: (Height: 40, Top: 6);
+      LayoutMode: Left;
+      Background: @RowBg;
+      Padding: (Horizontal: 12, Vertical: 4);
+
+      Label {
+        Style: (FontSize: 15, VerticalAlignment: Center, TextColor: #c2d3de);
+        Anchor: (Width: 180);
+        Text: "Defense";
+      }
+
+      Label #DefenseValue {
+        Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #ffffff);
+        Anchor: (Width: 60);
+        Text: "1";
+      }
+
+      Group #DefenseMinus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "-";
+        }
+      }
+
+      Group #DefensePlus {
+        Anchor: (Width: 32, Height: 32);
+        Background: @BtnBg;
+
+        Label {
+          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
+          Text: "+";
+        }
+      }
+    }
+
+    Group {
+      Anchor: (Height: 1, Top: 12);
+      Background: @SeparatorColor;
+    }
+
+    Label #AbilitiesTitle {
+      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #96a9be);
+      Anchor: (Top: 8);
+      Text: "Abilities";
+    }
+
+    Label #AbilitiesList {
+      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #6c7886);
+      Anchor: (Top: 4);
+      Text: "None";
+    }
+  }
+}

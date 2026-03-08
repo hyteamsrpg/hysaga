@@ -15,9 +15,13 @@ public class PlayerData {
     private int dexterity;
     private int agility;
     private int intelligence;
+    private int defense;
 
     // Abilities (stored as enum name strings)
     private List<String> abilities;
+
+    // Skill points
+    private int availablePoints;
 
     // Experience
     private int level;
@@ -37,6 +41,9 @@ public class PlayerData {
         this.dexterity = 1;
         this.agility = 1;
         this.intelligence = 1;
+        this.defense = 1;
+
+        this.availablePoints = 0;
 
         this.abilities = new ArrayList<>();
         this.level = 1;
@@ -49,6 +56,9 @@ public class PlayerData {
     public void updateOnJoin(String username) {
         this.username = username;
         this.lastJoin = Instant.now();
+
+        // Migration: ensure fields added after initial release have valid defaults
+        if (this.defense <= 0) this.defense = 1;
     }
 
     // --- Skills ---
@@ -64,6 +74,14 @@ public class PlayerData {
 
     public int getIntelligence() { return intelligence; }
     public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
+
+    public int getDefense() { return defense; }
+    public void setDefense(int defense) { this.defense = defense; }
+
+    // --- Skill Points ---
+
+    public int getAvailablePoints() { return availablePoints; }
+    public void setAvailablePoints(int availablePoints) { this.availablePoints = availablePoints; }
 
     // --- Abilities ---
 
