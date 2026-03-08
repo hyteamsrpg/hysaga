@@ -1,18 +1,21 @@
 package com.smirk.hysaga;
 
+import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
+import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
-import org.example.plugin.ExampleCommand;
-import org.example.plugin.SkillsCommand;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import com.smirk.hysaga.commands.SkillsCommand;
+import com.smirk.hysaga.data.PlayerDataManager;
+import com.smirk.hysaga.data.model.PlayerData;
+import com.smirk.hysaga.storage.StoragePaths;
 
 import javax.annotation.Nonnull;
+import java.nio.file.Path;
+import java.util.UUID;
 import java.util.logging.Level;
 
 /**
- * Main plugin class.
- *
- * TODO: Implement your plugin logic here.
- *
  * @author smirk
  * @version 0.0.1
  */
@@ -20,75 +23,76 @@ public class HysagaPlugin extends JavaPlugin {
 
     private static HysagaPlugin instance;
 
-    /**
-     * Constructor - Called when plugin is loaded.
-     */
+    private StoragePaths storagePaths;
+    private PlayerDataManager playerDataManager;
+
     public HysagaPlugin(@Nonnull JavaPluginInit init) {
         super(init);
         instance = this;
-        getLogger().at(Level.INFO).log("[TemplatePlugin] Plugin loaded!");
+        getLogger().at(Level.INFO).log("[Hysaga] Plugin loaded!");
     }
 
-    /**
-     * Get plugin instance.
-     */
     public static HysagaPlugin getInstance() {
         return instance;
     }
 
-    /**
-     * Called when plugin is set up.
-     */
     @Override
     protected void setup() {
         getLogger().at(Level.INFO).log("[Hysaga] Plugin setup!");
 
-        // TODO: Initialize your plugin here
-        // - Load configuration
-        // - Register event listeners
-        // - Register commands
-        // - Start services
+        Path dataDir = Path.of("plugins", "hysaga");
+        this.storagePaths = new StoragePaths(dataDir);
+        this.playerDataManager = new PlayerDataManager(storagePaths);
+
         registerEvents();
         registerCommands();
     }
 
-    /**
-     * Called when plugin is enabled.
-     */
     @Override
     protected void start() {
         getLogger().at(Level.INFO).log("[Hysaga] Plugin enabled!");
-
-
-
     }
 
-    /**
-     * Called when plugin is disabled.
-     */
     @Override
     public void shutdown() {
         getLogger().at(Level.INFO).log("[Hysaga] Plugin disabled!");
-
-        // TODO: Cleanup your plugin here
-        // - Save data
-        // - Stop services
-        // - Close connections
     }
 
-    /**
-     * Register your events here.
-     */
     private void registerEvents() {
+        this.getEventRegistry().register(PlayerConnectEvent.class, event -> {
+            PlayerRef playerRef = event.getPlayerRef();
+            UUID playerId = playerRef.getUuid();
+            String username = playerRef.getUsername();
 
+            boolean isNew = !playerDataManager.exists(playerId);
+            PlayerData data = playerDataManager.loadOrCreate(playerId, username);
+
+            if (isNew) {
+                getLogger().at(Level.INFO).log("[Hysaga] New player profile created for " + username);
+            } else {
+                getLogger().at(Level.INFO).log("[Hysaga] Loaded profile for " + username
+                        + " (Lv." + data.getLevel() + ")");
+            }
+        });
+
+        this.getEventRegistry().register(PlayerDisconnectEvent.class, event -> {
+            PlayerRef playerRef = event.getPlayerRef();
+            UUID playerId = playerRef.getUuid();
+
+            PlayerData data = playerDataManager.getCached(playerId);
+            if (data != null) {
+                playerDataManager.save(data);
+            }
+            playerDataManager.unload(playerId);
+        });
     }
 
-    /**
-     * Register your commands here.
-     */
     private void registerCommands() {
-        this.getCommandRegistry().registerCommand(new SkillsCommand(this.getName(), this.getManifest().getVersion().toString()));
-
+        this.getCommandRegistry().registerCommand(
+                new SkillsCommand(this.getName(), this.getManifest().getVersion().toString(), playerDataManager));
     }
 
+    public PlayerDataManager getPlayerDataManager() {
+        return playerDataManager;
+    }
 }
