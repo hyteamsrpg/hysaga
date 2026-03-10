@@ -20,6 +20,9 @@ public class PlayerData {
     // Abilities (stored as enum name strings)
     private List<String> abilities;
 
+    // Class (null = no class selected, stored as enum name)
+    private String playerClass;
+
     // Skill points
     private int availablePoints;
 
@@ -112,6 +115,20 @@ public class PlayerData {
 
     public int getExp() { return exp; }
     public void setExp(int exp) { this.exp = exp; }
+
+    // --- Class ---
+
+    public String getPlayerClass() { return playerClass; }
+    public void setPlayerClass(String playerClass) { this.playerClass = playerClass; }
+
+    public PlayerClass getPlayerClassEnum() {
+        if (playerClass == null) return null;
+        try {
+            return PlayerClass.valueOf(playerClass);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 
     // --- Identity & Metadata ---
 

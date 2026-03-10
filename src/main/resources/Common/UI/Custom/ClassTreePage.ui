@@ -1,0 +1,82 @@
+$Common = "Common.ui";
+
+@PanelBg = PatchStyle(TexturePath: "MyBackground.png");
+@SeparatorColor = #a6afba(0.20);
+@AccentColor = #a27e39;
+@TabActive = #a27e39;
+@TabInactive = #2b3542;
+
+Group {
+  LayoutMode: Center;
+
+  Group #ClassTreePanel {
+    Background: @PanelBg;
+    Anchor: (Width: 520, Height: 560);
+    LayoutMode: Top;
+    Padding: (Horizontal: 24, Top: 16, Bottom: 16);
+
+    Group #TabBar {
+      Anchor: (Height: 36);
+      LayoutMode: Left;
+      Padding: (Horizontal: 40);
+
+      Group #SkillsTabBtn {
+        Anchor: (Width: 190, Height: 32);
+        Background: @TabInactive;
+
+        Label #SkillsTabBtnLabel {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #6c7886);
+          Text: "Skills";
+        }
+      }
+
+      Group {
+        Anchor: (Width: 12);
+      }
+
+      Group #ClassTabBtn {
+        Anchor: (Width: 190, Height: 32);
+        Background: @TabActive;
+
+        Label #ClassTabBtnLabel {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
+          Text: "Class";
+        }
+      }
+    }
+
+    Group {
+      Anchor: (Height: 2, Top: 8);
+      Background: @AccentColor;
+    }
+
+    Label #CurrentClassName {
+      Style: (FontSize: 22, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #c2d3de);
+      Anchor: (Top: 24);
+      Text: "WARRIOR";
+    }
+
+    Label {
+      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #96a9be);
+      Anchor: (Top: 6);
+      Text: "Your Current Class";
+    }
+
+    Group {
+      Anchor: (Height: 1, Top: 24);
+      Background: @SeparatorColor;
+    }
+
+    Label {
+      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #96a9be);
+      Anchor: (Top: 12);
+      Text: "Class Tree";
+    }
+
+    Label {
+      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #6c7886);
+      Anchor: (Top: 8);
+      Text: "Coming Soon...";
+    }
+  }
+}

@@ -50,7 +50,7 @@ public class SkillsCommand extends AbstractPlayerCommand {
         PlayerData finalData = data;
 
         CompletableFuture.runAsync(() -> {
-            player.getPageManager().openCustomPage(ref, store, new SkillsPage(playerRef, finalData, skillsConfig));
+            player.getPageManager().openCustomPage(ref, store, new SkillsPage(playerRef, finalData, skillsConfig, playerDataManager));
         }, world);
     }
 }

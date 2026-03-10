@@ -1,0 +1,143 @@
+$Common = "Common.ui";
+
+@PanelBg = PatchStyle(TexturePath: "MyBackground.png");
+@SeparatorColor = #a6afba(0.20);
+@AccentColor = #a27e39;
+@BtnBg = #2b3542;
+@TabActive = #a27e39;
+@TabInactive = #2b3542;
+@ConfirmBg = #3a7d44;
+
+Group {
+  LayoutMode: Center;
+
+  Group #ClassPanel {
+    Background: @PanelBg;
+    Anchor: (Width: 520, Height: 560);
+    LayoutMode: Top;
+    Padding: (Horizontal: 24, Top: 16, Bottom: 16);
+
+    Group #TabBar {
+      Anchor: (Height: 36);
+      LayoutMode: Left;
+      Padding: (Horizontal: 40);
+
+      Group #SkillsTabBtn {
+        Anchor: (Width: 190, Height: 32);
+        Background: @TabInactive;
+
+        Label #SkillsTabBtnLabel {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #6c7886);
+          Text: "Skills";
+        }
+      }
+
+      Group {
+        Anchor: (Width: 12);
+      }
+
+      Group #ClassTabBtn {
+        Anchor: (Width: 190, Height: 32);
+        Background: @TabActive;
+
+        Label #ClassTabBtnLabel {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
+          Text: "Class";
+        }
+      }
+    }
+
+    Group {
+      Anchor: (Height: 2, Top: 8);
+      Background: @AccentColor;
+    }
+
+    Label {
+      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #96a9be);
+      Anchor: (Top: 12);
+      Text: "Choose Your Class";
+    }
+
+    Group #ClassCarousel {
+      Anchor: (Height: 50, Top: 16);
+      LayoutMode: Left;
+      Padding: (Horizontal: 30);
+
+      Group #PrevClassBtn {
+        Anchor: (Width: 40, Height: 40);
+        Background: @BtnBg;
+
+        Label #PrevClassBtnLabel {
+          Style: (FontSize: 22, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
+          Text: "<";
+        }
+      }
+
+      Label #ClassName {
+        Style: (FontSize: 22, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #c2d3de);
+        Anchor: (Width: 312);
+        Text: "WARRIOR";
+      }
+
+      Group #NextClassBtn {
+        Anchor: (Width: 40, Height: 40);
+        Background: @BtnBg;
+
+        Label #NextClassBtnLabel {
+          Style: (FontSize: 22, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
+          Text: ">";
+        }
+      }
+    }
+
+    Label #ClassDescription {
+      Style: (FontSize: 12, HorizontalAlignment: Center, TextColor: #7a8a9e);
+      Anchor: (Top: 8);
+      Text: "...";
+    }
+
+    Group {
+      Anchor: (Height: 1, Top: 16);
+      Background: @SeparatorColor;
+    }
+
+    Label {
+      Style: (FontSize: 13, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #96a9be);
+      Anchor: (Top: 10);
+      Text: "Base Stats";
+    }
+
+    Label #ClassBaseStats {
+      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentColor);
+      Anchor: (Top: 6);
+      Text: "Strength: +5";
+    }
+
+    Group {
+      Anchor: (Height: 1, Top: 14);
+      Background: @SeparatorColor;
+    }
+
+    Label {
+      Style: (FontSize: 13, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #96a9be);
+      Anchor: (Top: 10);
+      Text: "Passive Bonus";
+    }
+
+    Label #ClassPassive {
+      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentColor);
+      Anchor: (Top: 6);
+      Text: "+10% Max Health";
+    }
+
+    Group #ConfirmClassBtn {
+      Anchor: (Width: 220, Height: 40, Top: 30);
+      Background: @ConfirmBg;
+
+      Label #ConfirmClassBtnLabel {
+        Style: (FontSize: 15, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
+        Text: "Confirm Selection";
+      }
+    }
+  }
+}
