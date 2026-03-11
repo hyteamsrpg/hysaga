@@ -49,16 +49,14 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
 
         if (activeTab == Tab.SKILLS) {
             buildSkillsTab(cmd, playerClass);
+            bindTabEvents(events);
         } else if (playerClass == null) {
             buildClassSelectTab(cmd);
+            bindTabEvents(events);
+            bindClassSelectEvents(events);
         } else {
             buildClassTreeTab(cmd, playerClass);
-        }
-
-        bindTabEvents(events);
-
-        if (activeTab == Tab.CLASS && playerClass == null) {
-            bindClassSelectEvents(events);
+            bindTabEvents(events);
         }
     }
 
@@ -112,36 +110,36 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
 
     private void bindTabEvents(UIEventBuilder events) {
         events.addEventBinding(
-                CustomUIEventBindingType.Pressed,
+                CustomUIEventBindingType.Activating,
                 "#SkillsTabBtn",
-                EventData.of("@SkillsTab", "#SkillsTabBtnLabel.Text"),
+                EventData.of("Action", "skillsTab"),
                 false
         );
         events.addEventBinding(
-                CustomUIEventBindingType.Pressed,
+                CustomUIEventBindingType.Activating,
                 "#ClassTabBtn",
-                EventData.of("@ClassTab", "#ClassTabBtnLabel.Text"),
+                EventData.of("Action", "classTab"),
                 false
         );
     }
 
     private void bindClassSelectEvents(UIEventBuilder events) {
         events.addEventBinding(
-                CustomUIEventBindingType.Pressed,
+                CustomUIEventBindingType.Activating,
                 "#PrevClassBtn",
-                EventData.of("@PrevClass", "#PrevClassBtnLabel.Text"),
+                EventData.of("Action", "prevClass"),
                 false
         );
         events.addEventBinding(
-                CustomUIEventBindingType.Pressed,
+                CustomUIEventBindingType.Activating,
                 "#NextClassBtn",
-                EventData.of("@NextClass", "#NextClassBtnLabel.Text"),
+                EventData.of("Action", "nextClass"),
                 false
         );
         events.addEventBinding(
-                CustomUIEventBindingType.Pressed,
+                CustomUIEventBindingType.Activating,
                 "#ConfirmClassBtn",
-                EventData.of("@Confirm", "#ConfirmClassBtnLabel.Text"),
+                EventData.of("Action", "confirm"),
                 false
         );
     }
@@ -150,21 +148,31 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
     public void handleDataEvent(@Nonnull Ref<EntityStore> ref, @Nonnull Store<EntityStore> store, EventInput data) {
         super.handleDataEvent(ref, store, data);
 
-        if (data.skillsTab != null) {
-            activeTab = Tab.SKILLS;
-        } else if (data.classTab != null) {
-            activeTab = Tab.CLASS;
-        } else if (data.prevClass != null) {
-            selectedClassIndex = (selectedClassIndex + CLASSES.length - 1) % CLASSES.length;
-        } else if (data.nextClass != null) {
-            selectedClassIndex = (selectedClassIndex + 1) % CLASSES.length;
-        } else if (data.confirm != null && playerData.getPlayerClassEnum() == null) {
-            PlayerClass selected = CLASSES[selectedClassIndex];
-            playerData.setPlayerClass(selected.name());
-            playerDataManager.save(playerData);
+        if (data.action == null) return;
+
+        switch (data.action) {
+            case "skillsTab":
+                activeTab = Tab.SKILLS;
+                break;
+            case "classTab":
+                activeTab = Tab.CLASS;
+                break;
+            case "prevClass":
+                selectedClassIndex = (selectedClassIndex + CLASSES.length - 1) % CLASSES.length;
+                break;
+            case "nextClass":
+                selectedClassIndex = (selectedClassIndex + 1) % CLASSES.length;
+                break;
+            case "confirm":
+                if (playerData.getPlayerClassEnum() == null) {
+                    PlayerClass selected = CLASSES[selectedClassIndex];
+                    playerData.setPlayerClass(selected.name());
+                    playerDataManager.save(playerData);
+                }
+                break;
         }
 
-        sendUpdate();
+        rebuild();
     }
 
     private String formatStat(int allocated, int bonus) {
@@ -185,17 +193,9 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
 
     public static class EventInput {
         public static final BuilderCodec<EventInput> CODEC = BuilderCodec.builder(EventInput.class, EventInput::new)
-                .append(new KeyedCodec<>("@SkillsTab", Codec.STRING), (d, v) -> d.skillsTab = v, d -> d.skillsTab).add()
-                .append(new KeyedCodec<>("@ClassTab", Codec.STRING), (d, v) -> d.classTab = v, d -> d.classTab).add()
-                .append(new KeyedCodec<>("@PrevClass", Codec.STRING), (d, v) -> d.prevClass = v, d -> d.prevClass).add()
-                .append(new KeyedCodec<>("@NextClass", Codec.STRING), (d, v) -> d.nextClass = v, d -> d.nextClass).add()
-                .append(new KeyedCodec<>("@Confirm", Codec.STRING), (d, v) -> d.confirm = v, d -> d.confirm).add()
+                .append(new KeyedCodec<>("Action", Codec.STRING), (d, v) -> d.action = v, d -> d.action).add()
                 .build();
 
-        private String skillsTab;
-        private String classTab;
-        private String prevClass;
-        private String nextClass;
-        private String confirm;
+        private String action;
     }
 }

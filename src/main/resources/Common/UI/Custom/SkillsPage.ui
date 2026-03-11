@@ -29,28 +29,20 @@ Group {
       LayoutMode: Left;
       Padding: (Horizontal: 40);
 
-      Group #SkillsTabBtn {
+      TextButton #SkillsTabBtn {
         Anchor: (Width: 190, Height: 32);
         Background: @TabActive;
-
-        Label #SkillsTabBtnLabel {
-          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
-          Text: "Skills";
-        }
+        Text: "Skills";
       }
 
       Group {
         Anchor: (Width: 12);
       }
 
-      Group #ClassTabBtn {
+      TextButton #ClassTabBtn {
         Anchor: (Width: 190, Height: 32);
         Background: @TabInactive;
-
-        Label #ClassTabBtnLabel {
-          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #6c7886);
-          Text: "Class";
-        }
+        Text: "Class";
       }
     }
 
@@ -99,24 +91,16 @@ Group {
         Text: "1";
       }
 
-      Group #StrengthMinus {
+      TextButton #StrengthMinus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "-";
-        }
+        Text: "-";
       }
 
-      Group #StrengthPlus {
+      TextButton #StrengthPlus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "+";
-        }
+        Text: "+";
       }
     }
 
@@ -143,24 +127,16 @@ Group {
         Text: "1";
       }
 
-      Group #DexterityMinus {
+      TextButton #DexterityMinus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "-";
-        }
+        Text: "-";
       }
 
-      Group #DexterityPlus {
+      TextButton #DexterityPlus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "+";
-        }
+        Text: "+";
       }
     }
 
@@ -187,24 +163,16 @@ Group {
         Text: "1";
       }
 
-      Group #AgilityMinus {
+      TextButton #AgilityMinus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "-";
-        }
+        Text: "-";
       }
 
-      Group #AgilityPlus {
+      TextButton #AgilityPlus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "+";
-        }
+        Text: "+";
       }
     }
 
@@ -231,24 +199,16 @@ Group {
         Text: "1";
       }
 
-      Group #IntelligenceMinus {
+      TextButton #IntelligenceMinus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "-";
-        }
+        Text: "-";
       }
 
-      Group #IntelligencePlus {
+      TextButton #IntelligencePlus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "+";
-        }
+        Text: "+";
       }
     }
 
@@ -275,24 +235,16 @@ Group {
         Text: "1";
       }
 
-      Group #DefenseMinus {
+      TextButton #DefenseMinus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "-";
-        }
+        Text: "-";
       }
 
-      Group #DefensePlus {
+      TextButton #DefensePlus {
         Anchor: (Width: 32, Height: 32);
         Background: @BtnBg;
-
-        Label {
-          Style: (FontSize: 16, HorizontalAlignment: Center, VerticalAlignment: Center, TextColor: #96a9be);
-          Text: "+";
-        }
+        Text: "+";
       }
     }
   }

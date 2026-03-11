@@ -20,28 +20,20 @@ Group {
       LayoutMode: Left;
       Padding: (Horizontal: 40);
 
-      Group #SkillsTabBtn {
+      TextButton #SkillsTabBtn {
         Anchor: (Width: 190, Height: 32);
         Background: @TabInactive;
-
-        Label #SkillsTabBtnLabel {
-          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #6c7886);
-          Text: "Skills";
-        }
+        Text: "Skills";
       }
 
       Group {
         Anchor: (Width: 12);
       }
 
-      Group #ClassTabBtn {
+      TextButton #ClassTabBtn {
         Anchor: (Width: 190, Height: 32);
         Background: @TabActive;
-
-        Label #ClassTabBtnLabel {
-          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
-          Text: "Class";
-        }
+        Text: "Class";
       }
     }
 

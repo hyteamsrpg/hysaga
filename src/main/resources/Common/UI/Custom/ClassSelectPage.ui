@@ -22,28 +22,20 @@ Group {
       LayoutMode: Left;
       Padding: (Horizontal: 40);
 
-      Group #SkillsTabBtn {
+      TextButton #SkillsTabBtn {
         Anchor: (Width: 190, Height: 32);
         Background: @TabInactive;
-
-        Label #SkillsTabBtnLabel {
-          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #6c7886);
-          Text: "Skills";
-        }
+        Text: "Skills";
       }
 
       Group {
         Anchor: (Width: 12);
       }
 
-      Group #ClassTabBtn {
+      TextButton #ClassTabBtn {
         Anchor: (Width: 190, Height: 32);
         Background: @TabActive;
-
-        Label #ClassTabBtnLabel {
-          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
-          Text: "Class";
-        }
+        Text: "Class";
       }
     }
 
@@ -63,14 +55,10 @@ Group {
       LayoutMode: Left;
       Padding: (Horizontal: 30);
 
-      Group #PrevClassBtn {
+      TextButton #PrevClassBtn {
         Anchor: (Width: 40, Height: 40);
         Background: @BtnBg;
-
-        Label #PrevClassBtnLabel {
-          Style: (FontSize: 22, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
-          Text: "<";
-        }
+        Text: "<";
       }
 
       Label #ClassName {
@@ -79,14 +67,10 @@ Group {
         Text: "WARRIOR";
       }
 
-      Group #NextClassBtn {
+      TextButton #NextClassBtn {
         Anchor: (Width: 40, Height: 40);
         Background: @BtnBg;
-
-        Label #NextClassBtnLabel {
-          Style: (FontSize: 22, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
-          Text: ">";
-        }
+        Text: ">";
       }
     }
 
@@ -130,14 +114,10 @@ Group {
       Text: "+10% Max Health";
     }
 
-    Group #ConfirmClassBtn {
+    TextButton #ConfirmClassBtn {
       Anchor: (Width: 220, Height: 40, Top: 30);
       Background: @ConfirmBg;
-
-      Label #ConfirmClassBtnLabel {
-        Style: (FontSize: 15, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: #c2d3de);
-        Text: "Confirm Selection";
-      }
+      Text: "Confirm Selection";
     }
   }
 }
