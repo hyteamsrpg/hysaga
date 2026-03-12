@@ -1,6 +1,11 @@
 $Common = "Common.ui";
 
 @PanelBg = PatchStyle(TexturePath: "MyBackground.png");
+@HunterIcon = PatchStyle(TexturePath: "hunter_icon.png");
+@MageIcon = PatchStyle(TexturePath: "mage_icon.png");
+@WarriorIcon = PatchStyle(TexturePath: "warrior_icon.png");
+@FadeBg = PatchStyle(TexturePath: "fade_circle.png");
+
 @SeparatorColor = #a6afba(0.20);
 @AccentColor = #a27e39;
 @TabActive = #a27e39;
