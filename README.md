@@ -1,19 +1,4 @@
-# Hytale Plugin Template
-
-A minimal, ready-to-use template for creating Hytale plugins with modern build tools and automated testing.
-
-> **✨ Builds immediately without any changes!** Clone and run `./gradlew shadowJar` to get a working plugin JAR.
-
-## Features
-
-✅ **Modern Build System** - Gradle with Groovy DSL  
-✅ **Automated Testing** - Custom Gradle plugin for one-command server testing  
-✅ **Java 25** - Latest Java features  
-✅ **ShadowJar** - Automatic dependency bundling  
-✅ **CI/CD Ready** - GitHub Actions workflow included  
-✅ **Minimal Structure** - Only essential files, write your own code
-
----
+# Hysaga
 
 ## Quick Start
 
