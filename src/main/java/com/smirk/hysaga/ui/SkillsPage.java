@@ -96,6 +96,9 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
         cmd.append("ClassSelectPage.ui");
 
         PlayerClass preview = CLASSES[selectedClassIndex];
+        cmd.appendInline("#ClassIcon",
+                "Group { Anchor: (Width: 80, Height: 80); Background: PatchStyle(TexturePath: \""
+                + preview.getIconTexture() + "\"); }");
         cmd.set("#ClassName.TextSpans", Message.raw(preview.getDisplayName()));
         cmd.set("#ClassDescription.TextSpans", Message.raw(preview.getDescription()));
         cmd.set("#ClassBaseStats.TextSpans", Message.raw(preview.getBaseStatsDisplay()));

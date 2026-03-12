@@ -5,22 +5,20 @@ public enum PlayerClass {
     WARRIOR("Warrior",
             "A mighty frontline combatant excelling in raw power and resilience.",
             5, 0, 0, 0, 0,
-            "Max Health", 10),
+            "Max Health", 10,
+            "warrior_icon.png"),
 
-    ROGUE("Rogue",
-            "A swift shadow striker who thrives on agility and precision.",
-            0, 0, 5, 0, 0,
-            "Crit Chance", 10),
+    HUNTER("Hunter",
+            "A keen-eyed stalker combining precision marksmanship with swift agility.",
+            0, 3, 2, 0, 0,
+            "Crit Chance", 10,
+            "hunter_icon.png"),
 
     MAGE("Mage",
             "A master of arcane arts wielding devastating magical forces.",
             0, 0, 0, 5, 0,
-            "Mana Regen", 10),
-
-    ARCHER("Archer",
-            "A keen-eyed marksman with unmatched dexterity and range.",
-            0, 5, 0, 0, 0,
-            "Move Speed", 10);
+            "Mana Regen", 10,
+            "mage_icon.png");
 
     private final String displayName;
     private final String description;
@@ -31,11 +29,13 @@ public enum PlayerClass {
     private final int defenseBonus;
     private final String passiveName;
     private final int passivePercent;
+    private final String iconTexture;
 
     PlayerClass(String displayName, String description,
                 int strengthBonus, int dexterityBonus, int agilityBonus,
                 int intelligenceBonus, int defenseBonus,
-                String passiveName, int passivePercent) {
+                String passiveName, int passivePercent,
+                String iconTexture) {
         this.displayName = displayName;
         this.description = description;
         this.strengthBonus = strengthBonus;
@@ -45,6 +45,7 @@ public enum PlayerClass {
         this.defenseBonus = defenseBonus;
         this.passiveName = passiveName;
         this.passivePercent = passivePercent;
+        this.iconTexture = iconTexture;
     }
 
     public String getDisplayName() { return displayName; }
@@ -56,6 +57,7 @@ public enum PlayerClass {
     public int getDefenseBonus() { return defenseBonus; }
     public String getPassiveName() { return passiveName; }
     public int getPassivePercent() { return passivePercent; }
+    public String getIconTexture() { return iconTexture; }
 
     public String getBaseStatsDisplay() {
         StringBuilder sb = new StringBuilder();
