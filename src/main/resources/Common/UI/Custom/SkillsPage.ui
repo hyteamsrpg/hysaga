@@ -1,6 +1,8 @@
 $Common = "Common.ui";
 
 @PanelBg = PatchStyle(TexturePath: "MyBackground.png");
+@FadeBg = PatchStyle(TexturePath: "fade_circle.png");
+
 @RowBg = #1a2530;
 @SeparatorColor = #a6afba(0.20);
 @AccentColor = #a27e39;
