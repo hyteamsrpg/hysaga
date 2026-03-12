@@ -6,18 +6,21 @@ public enum PlayerClass {
             "A mighty frontline combatant excelling in raw power and resilience.",
             5, 0, 0, 0, 0,
             "Max Health", 10,
+            "Strength", 50,
             "warrior_icon.png"),
 
     HUNTER("Hunter",
             "A keen-eyed stalker combining precision marksmanship with swift agility.",
-            0, 3, 2, 0, 0,
+            0, 0, 5, 0, 0,
             "Crit Chance", 10,
+            "Agility", 50,
             "hunter_icon.png"),
 
     MAGE("Mage",
             "A master of arcane arts wielding devastating magical forces.",
             0, 0, 0, 5, 0,
             "Mana Regen", 10,
+            "Intelligence", 50,
             "mage_icon.png");
 
     private final String displayName;
@@ -29,12 +32,15 @@ public enum PlayerClass {
     private final int defenseBonus;
     private final String passiveName;
     private final int passivePercent;
+    private final String amplifiedStat;
+    private final int amplifierPercent;
     private final String iconTexture;
 
     PlayerClass(String displayName, String description,
                 int strengthBonus, int dexterityBonus, int agilityBonus,
                 int intelligenceBonus, int defenseBonus,
                 String passiveName, int passivePercent,
+                String amplifiedStat, int amplifierPercent,
                 String iconTexture) {
         this.displayName = displayName;
         this.description = description;
@@ -45,6 +51,8 @@ public enum PlayerClass {
         this.defenseBonus = defenseBonus;
         this.passiveName = passiveName;
         this.passivePercent = passivePercent;
+        this.amplifiedStat = amplifiedStat;
+        this.amplifierPercent = amplifierPercent;
         this.iconTexture = iconTexture;
     }
 
@@ -57,6 +65,8 @@ public enum PlayerClass {
     public int getDefenseBonus() { return defenseBonus; }
     public String getPassiveName() { return passiveName; }
     public int getPassivePercent() { return passivePercent; }
+    public String getAmplifiedStat() { return amplifiedStat; }
+    public int getAmplifierPercent() { return amplifierPercent; }
     public String getIconTexture() { return iconTexture; }
 
     public String getBaseStatsDisplay() {

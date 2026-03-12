@@ -64,6 +64,8 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
         cmd.append("SkillsPage.ui");
 
         int max = config.getMaxPointsPerSkill();
+        String ampStat = playerClass != null ? playerClass.getAmplifiedStat() : null;
+        int ampPct = playerClass != null ? playerClass.getAmplifierPercent() : 0;
 
         cmd.set("#LevelInfo.TextSpans", Message.raw(
                 "Level " + playerData.getLevel() + " | " + playerData.getExp() + " XP"));
@@ -76,20 +78,31 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
         int intBonus = playerClass != null ? playerClass.getIntelligenceBonus() : 0;
         int defBonus = playerClass != null ? playerClass.getDefenseBonus() : 0;
 
+        boolean strAmp = "Strength".equals(ampStat);
+        boolean dexAmp = "Dexterity".equals(ampStat);
+        boolean agiAmp = "Agility".equals(ampStat);
+        boolean intAmp = "Intelligence".equals(ampStat);
+        boolean defAmp = "Defense".equals(ampStat);
+
         injectBar(cmd, "#StrengthTrack", playerData.getStrength() + strBonus, max, "#e87461");
-        cmd.set("#StrengthValue.TextSpans", Message.raw(formatStat(playerData.getStrength(), strBonus)));
+        cmd.set("#StrengthValue.TextSpans", Message.raw(formatStat(playerData.getStrength(), strBonus, strAmp, ampPct)));
 
         injectBar(cmd, "#DexterityTrack", playerData.getDexterity() + dexBonus, max, "#e8d44d");
-        cmd.set("#DexterityValue.TextSpans", Message.raw(formatStat(playerData.getDexterity(), dexBonus)));
+        cmd.set("#DexterityValue.TextSpans", Message.raw(formatStat(playerData.getDexterity(), dexBonus, dexAmp, ampPct)));
 
         injectBar(cmd, "#AgilityTrack", playerData.getAgility() + agiBonus, max, "#5cb85c");
-        cmd.set("#AgilityValue.TextSpans", Message.raw(formatStat(playerData.getAgility(), agiBonus)));
+        cmd.set("#AgilityValue.TextSpans", Message.raw(formatStat(playerData.getAgility(), agiBonus, agiAmp, ampPct)));
 
         injectBar(cmd, "#IntelligenceTrack", playerData.getIntelligence() + intBonus, max, "#5b9bd5");
-        cmd.set("#IntelligenceValue.TextSpans", Message.raw(formatStat(playerData.getIntelligence(), intBonus)));
+        cmd.set("#IntelligenceValue.TextSpans", Message.raw(formatStat(playerData.getIntelligence(), intBonus, intAmp, ampPct)));
 
         injectBar(cmd, "#DefenseTrack", playerData.getDefense() + defBonus, max, "#d4d4d4");
-        cmd.set("#DefenseValue.TextSpans", Message.raw(formatStat(playerData.getDefense(), defBonus)));
+        cmd.set("#DefenseValue.TextSpans", Message.raw(formatStat(playerData.getDefense(), defBonus, defAmp, ampPct)));
+
+        if (playerClass != null) {
+            cmd.set("#ClassBonus.TextSpans", Message.raw(
+                    playerClass.getAmplifiedStat() + " is " + playerClass.getAmplifierPercent() + "% more effective (" + playerClass.getDisplayName() + ")"));
+        }
     }
 
     private void buildClassSelectTab(UICommandBuilder cmd) {
@@ -97,13 +110,15 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
 
         PlayerClass preview = CLASSES[selectedClassIndex];
         cmd.appendInline("#ClassIcon",
-                "Group { Anchor: (Width: 80, Height: 80); Background: PatchStyle(TexturePath: \""
+                "Group { Anchor: (Width: 160, Height: 160); Background: PatchStyle(TexturePath: \""
                 + preview.getIconTexture() + "\"); }");
         cmd.set("#ClassName.TextSpans", Message.raw(preview.getDisplayName()));
         cmd.set("#ClassDescription.TextSpans", Message.raw(preview.getDescription()));
         cmd.set("#ClassBaseStats.TextSpans", Message.raw(preview.getBaseStatsDisplay()));
         cmd.set("#ClassPassive.TextSpans", Message.raw(
                 "+" + preview.getPassivePercent() + "% " + preview.getPassiveName()));
+        cmd.set("#ClassAmplifier.TextSpans", Message.raw(
+                preview.getAmplifiedStat() + " is " + preview.getAmplifierPercent() + "% more effective"));
     }
 
     private void buildClassTreeTab(UICommandBuilder cmd, PlayerClass playerClass) {
@@ -178,11 +193,21 @@ public class SkillsPage extends InteractiveCustomUIPage<SkillsPage.EventInput> {
         rebuild();
     }
 
-    private String formatStat(int allocated, int bonus) {
+    private String formatStat(int allocated, int bonus, boolean amplified, int ampPct) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(allocated);
         if (bonus > 0) {
-            return allocated + " (+" + bonus + ")";
+            sb.append(" (+").append(bonus).append(")");
         }
-        return String.valueOf(allocated);
+        if (amplified) {
+            double multiplier = 1.0 + ampPct / 100.0;
+            if (multiplier == (int) multiplier) {
+                sb.append(" x").append((int) multiplier);
+            } else {
+                sb.append(" x").append(String.format("%.2g", multiplier));
+            }
+        }
+        return sb.toString();
     }
 
     private void injectBar(UICommandBuilder cmd, String trackSelector, int total, int maxValue, String color) {

@@ -18,7 +18,7 @@ Group {
 
   Group #ClassPanel {
     Background: @PanelBg;
-    Anchor: (Width: 520, Height: 560);
+    Anchor: (Width: 520, Height: 780);
     LayoutMode: Top;
     Padding: (Horizontal: 24, Top: 16, Bottom: 16);
 
@@ -56,7 +56,7 @@ Group {
     }
 
     Group #ClassCarousel {
-      Anchor: (Height: 200, Top: 16);
+      Anchor: (Height: 300, Top: 16);
       LayoutMode: Left;
       Padding: (Horizontal: 30);
 
@@ -71,12 +71,12 @@ Group {
         LayoutMode: Top;
 
         Group #ClassIconArea {
-          Anchor: (Width: 120, Height: 120);
+          Anchor: (Width: 240, Height: 240);
           Background: @FadeBg;
           LayoutMode: Center;
 
           Group #ClassIcon {
-            Anchor: (Width: 80, Height: 80);
+            Anchor: (Width: 160, Height: 160);
           }
         }
 
@@ -132,6 +132,23 @@ Group {
       Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentColor);
       Anchor: (Top: 6);
       Text: "+10% Max Health";
+    }
+
+    Group {
+      Anchor: (Height: 1, Top: 14);
+      Background: @SeparatorColor;
+    }
+
+    Label {
+      Style: (FontSize: 13, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #96a9be);
+      Anchor: (Top: 10);
+      Text: "Class Bonus";
+    }
+
+    Label #ClassAmplifier {
+      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentColor);
+      Anchor: (Top: 6);
+      Text: "Strength is 50% more effective";
     }
 
     TextButton #ConfirmClassBtn {

@@ -249,5 +249,46 @@ Group {
         Text: "+";
       }
     }
+
+    Group {
+      Anchor: (Height: 1, Top: 10);
+      Background: @SeparatorColor;
+    }
+
+    Label {
+      Style: (FontSize: 12, TextColor: #5a6a7e);
+      Anchor: (Top: 6);
+      Text: "STR: Physical damage";
+    }
+
+    Label {
+      Style: (FontSize: 12, TextColor: #5a6a7e);
+      Anchor: (Top: 2);
+      Text: "DEX: Crit chance & crit damage";
+    }
+
+    Label {
+      Style: (FontSize: 12, TextColor: #5a6a7e);
+      Anchor: (Top: 2);
+      Text: "AGI: Dodge chance & move speed";
+    }
+
+    Label {
+      Style: (FontSize: 12, TextColor: #5a6a7e);
+      Anchor: (Top: 2);
+      Text: "INT: Mana regen & spell power";
+    }
+
+    Label {
+      Style: (FontSize: 12, TextColor: #5a6a7e);
+      Anchor: (Top: 2);
+      Text: "DEF: Reduces incoming damage";
+    }
+
+    Label #ClassBonus {
+      Style: (FontSize: 11, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentColor);
+      Anchor: (Top: 6);
+      Text: "";
+    }
   }
 }
