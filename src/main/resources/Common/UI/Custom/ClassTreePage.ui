@@ -1,79 +1,113 @@
 $Common = "Common.ui";
 
-@PanelBg = PatchStyle(TexturePath: "MyBackground.png");
-@HunterIcon = PatchStyle(TexturePath: "hunter_icon.png");
-@MageIcon = PatchStyle(TexturePath: "mage_icon.png");
-@WarriorIcon = PatchStyle(TexturePath: "warrior_icon.png");
-@FadeBg = PatchStyle(TexturePath: "fade_circle.png");
+@ContainerBg = PatchStyle(TexturePath: "Common/ContainerPatch.png", Border: 23);
+@AccentGold = #e1a738;
 
-@SeparatorColor = #a6afba(0.20);
-@AccentColor = #a27e39;
-@TabActive = #a27e39;
-@TabInactive = #2b3542;
+@TabStyle = TextButtonStyle(
+  Default: (
+    LabelStyle: (FontSize: 14, TextColor: #96a9be, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabBackground.png", Border: 7)
+  ),
+  Hovered: (
+    LabelStyle: (FontSize: 14, TextColor: #c2d3de, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabBackground.png", Border: 7)
+  ),
+  Pressed: (
+    LabelStyle: (FontSize: 14, TextColor: #f0de7b, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabSelectedBackground.png", Border: 7)
+  )
+);
+
+@ActiveTabStyle = TextButtonStyle(
+  Default: (
+    LabelStyle: (FontSize: 14, TextColor: #f0de7b, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabSelectedBackground.png", Border: 7)
+  ),
+  Hovered: (
+    LabelStyle: (FontSize: 14, TextColor: #f0de7b, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabSelectedBackground.png", Border: 7)
+  )
+);
 
 Group {
+  Background: #000000(0.45);
   LayoutMode: Center;
 
   Group #ClassTreePanel {
-    Background: @PanelBg;
     Anchor: (Width: 520, Height: 560);
-    LayoutMode: Top;
-    Padding: (Horizontal: 24, Top: 16, Bottom: 16);
+    Background: @ContainerBg;
 
-    Group #TabBar {
-      Anchor: (Height: 36);
-      LayoutMode: Left;
-      Padding: (Horizontal: 40);
+    Group {
+      Anchor: (Width: 236, Height: 11, Top: -12);
+      Background: "Common/ContainerDecorationTop.png";
+    }
 
-      TextButton #SkillsTabBtn {
-        Anchor: (Width: 190, Height: 32);
-        Background: @TabInactive;
-        Text: "Skills";
+    Group {
+      Anchor: (Full: 0);
+      LayoutMode: Top;
+      Padding: (Horizontal: 24, Top: 16, Bottom: 16);
+
+      Group #TabBar {
+        Anchor: (Height: 36);
+        LayoutMode: Left;
+        Padding: (Horizontal: 30);
+
+        TextButton #SkillsTabBtn {
+          Anchor: (Width: 190, Height: 32);
+          Style: @TabStyle;
+          Text: "Skills";
+        }
+
+        Group {
+          Anchor: (Width: 16);
+        }
+
+        TextButton #ClassTabBtn {
+          Anchor: (Width: 190, Height: 32);
+          Style: @ActiveTabStyle;
+          Text: "Class";
+        }
       }
 
       Group {
-        Anchor: (Width: 12);
+        Anchor: (Height: 6, Top: 8);
+        Background: "Common/ContainerSectionSeparator.png";
       }
 
-      TextButton #ClassTabBtn {
-        Anchor: (Width: 190, Height: 32);
-        Background: @TabActive;
-        Text: "Class";
+      Label #CurrentClassName {
+        Style: (FontSize: 22, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #c2d3de);
+        MaskTexturePath: "Common/TextGradient.png";
+        Anchor: (Top: 24);
+        Text: "WARRIOR";
+      }
+
+      Label {
+        Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #96a9be);
+        Anchor: (Top: 6);
+        Text: "Your Current Class";
+      }
+
+      Group {
+        Anchor: (Height: 6, Top: 24);
+        Background: "Common/ContainerSectionSeparator.png";
+      }
+
+      Label {
+        Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #96a9be);
+        Anchor: (Top: 12);
+        Text: "Class Tree";
+      }
+
+      Label {
+        Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #6c7886);
+        Anchor: (Top: 8);
+        Text: "Coming Soon...";
       }
     }
 
     Group {
-      Anchor: (Height: 2, Top: 8);
-      Background: @AccentColor;
-    }
-
-    Label #CurrentClassName {
-      Style: (FontSize: 22, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #c2d3de);
-      Anchor: (Top: 24);
-      Text: "WARRIOR";
-    }
-
-    Label {
-      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #96a9be);
-      Anchor: (Top: 6);
-      Text: "Your Current Class";
-    }
-
-    Group {
-      Anchor: (Height: 1, Top: 24);
-      Background: @SeparatorColor;
-    }
-
-    Label {
-      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, RenderUppercase: true, TextColor: #96a9be);
-      Anchor: (Top: 12);
-      Text: "Class Tree";
-    }
-
-    Label {
-      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #6c7886);
-      Anchor: (Top: 8);
-      Text: "Coming Soon...";
+      Anchor: (Width: 236, Height: 11, Bottom: -6);
+      Background: "Common/ContainerDecorationBottom.png";
     }
   }
 }

@@ -1,294 +1,347 @@
 $Common = "Common.ui";
 
-@PanelBg = PatchStyle(TexturePath: "MyBackground.png");
-@FadeBg = PatchStyle(TexturePath: "fade_circle.png");
+@ContainerBg = PatchStyle(TexturePath: "Common/ContainerPatch.png", Border: 23);
+@RowBg = PatchStyle(TexturePath: "Common/OptionBackgroundPatch.png", Border: 16);
+@TrackBg = PatchStyle(TexturePath: "Common/ProgressBar.png", Border: 3);
+@SepLine = #a6afba(0.20);
 
-@RowBg = #1a2530;
-@SeparatorColor = #a6afba(0.20);
-@AccentColor = #a27e39;
-@BtnBg = #2b3542;
-@TrackBg = #0a0e12(0.75);
-@TabActive = #a27e39;
-@TabInactive = #2b3542;
-
+@AccentGold = #e1a738;
 @StrColor = #e87461;
 @DexColor = #e8d44d;
 @DefColor = #d4d4d4;
 @AgiColor = #5cb85c;
 @IntColor = #5b9bd5;
 
+@TabStyle = TextButtonStyle(
+  Default: (
+    LabelStyle: (FontSize: 14, TextColor: #96a9be, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabBackground.png", Border: 7)
+  ),
+  Hovered: (
+    LabelStyle: (FontSize: 14, TextColor: #c2d3de, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabBackground.png", Border: 7)
+  ),
+  Pressed: (
+    LabelStyle: (FontSize: 14, TextColor: #f0de7b, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabSelectedBackground.png", Border: 7)
+  )
+);
+
+@ActiveTabStyle = TextButtonStyle(
+  Default: (
+    LabelStyle: (FontSize: 14, TextColor: #f0de7b, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabSelectedBackground.png", Border: 7)
+  ),
+  Hovered: (
+    LabelStyle: (FontSize: 14, TextColor: #f0de7b, RenderUppercase: true, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/HeaderTabSelectedBackground.png", Border: 7)
+  )
+);
+
+@BtnStyle = TextButtonStyle(
+  Default: (
+    LabelStyle: (FontSize: 16, TextColor: #96a9be, VerticalAlignment: Center, HorizontalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/SecondaryButton.png", Border: 12)
+  ),
+  Hovered: (
+    LabelStyle: (FontSize: 16, TextColor: #c2d3de, VerticalAlignment: Center, HorizontalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/SecondaryButtonHovered.png", Border: 12)
+  ),
+  Pressed: (
+    LabelStyle: (FontSize: 16, TextColor: #f0de7b, VerticalAlignment: Center, HorizontalAlignment: Center, RenderBold: true),
+    Background: (TexturePath: "Common/SecondaryButtonPressed.png", Border: 12)
+  )
+);
+
 Group {
+  Background: #000000(0.45);
   LayoutMode: Center;
 
   Group #SkillsPanel {
-    Background: @PanelBg;
     Anchor: (Width: 520, Height: 560);
-    LayoutMode: Top;
-    Padding: (Horizontal: 24, Top: 16, Bottom: 16);
+    Background: @ContainerBg;
 
-    Group #TabBar {
-      Anchor: (Height: 36);
-      LayoutMode: Left;
-      Padding: (Horizontal: 40);
+    Group {
+      Anchor: (Width: 236, Height: 11, Top: -12);
+      Background: "Common/ContainerDecorationTop.png";
+    }
 
-      TextButton #SkillsTabBtn {
-        Anchor: (Width: 190, Height: 32);
-        Background: @TabActive;
-        Text: "Skills";
+    Group {
+      Anchor: (Full: 0);
+      LayoutMode: Top;
+      Padding: (Horizontal: 20, Top: 16, Bottom: 16);
+
+      Group #TabBar {
+        Anchor: (Height: 36);
+        LayoutMode: Left;
+        Padding: (Horizontal: 30);
+
+        TextButton #SkillsTabBtn {
+          Anchor: (Width: 190, Height: 32);
+          Style: @ActiveTabStyle;
+          Text: "Skills";
+        }
+
+        Group {
+          Anchor: (Width: 16);
+        }
+
+        TextButton #ClassTabBtn {
+          Anchor: (Width: 190, Height: 32);
+          Style: @TabStyle;
+          Text: "Class";
+        }
       }
 
       Group {
-        Anchor: (Width: 12);
+        Anchor: (Height: 6, Top: 8);
+        Background: "Common/ContainerSectionSeparator.png";
       }
 
-      TextButton #ClassTabBtn {
-        Anchor: (Width: 190, Height: 32);
-        Background: @TabInactive;
-        Text: "Class";
+      Label #LevelInfo {
+        Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #96a9be);
+        Anchor: (Top: 10);
+        Text: "Level 1 | 0 XP";
+      }
+
+      Label #AvailablePoints {
+        Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentGold);
+        MaskTexturePath: "Common/TextGradient.png";
+        Anchor: (Top: 4);
+        Text: "Available Points: 0";
+      }
+
+      Group {
+        Anchor: (Height: 1, Top: 10);
+        Background: @SepLine;
+      }
+
+      Group #StrengthRow {
+        Anchor: (Height: 44, Top: 10);
+        LayoutMode: Left;
+        Background: @RowBg;
+        Padding: (Horizontal: 10, Vertical: 4);
+
+        Label {
+          Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @StrColor);
+          Anchor: (Width: 100);
+          Text: "Strength";
+        }
+
+        Group #StrengthTrack {
+          Anchor: (Width: 200, Height: 12);
+          Background: @TrackBg;
+        }
+
+        Label #StrengthValue {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @StrColor);
+          Anchor: (Width: 80);
+          Text: "1";
+        }
+
+        TextButton #StrengthMinus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "-";
+        }
+
+        TextButton #StrengthPlus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "+";
+        }
+      }
+
+      Group #DexterityRow {
+        Anchor: (Height: 44, Top: 6);
+        LayoutMode: Left;
+        Background: @RowBg;
+        Padding: (Horizontal: 10, Vertical: 4);
+
+        Label {
+          Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @DexColor);
+          Anchor: (Width: 100);
+          Text: "Dexterity";
+        }
+
+        Group #DexterityTrack {
+          Anchor: (Width: 200, Height: 12);
+          Background: @TrackBg;
+        }
+
+        Label #DexterityValue {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @DexColor);
+          Anchor: (Width: 80);
+          Text: "1";
+        }
+
+        TextButton #DexterityMinus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "-";
+        }
+
+        TextButton #DexterityPlus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "+";
+        }
+      }
+
+      Group #AgilityRow {
+        Anchor: (Height: 44, Top: 6);
+        LayoutMode: Left;
+        Background: @RowBg;
+        Padding: (Horizontal: 10, Vertical: 4);
+
+        Label {
+          Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @AgiColor);
+          Anchor: (Width: 100);
+          Text: "Agility";
+        }
+
+        Group #AgilityTrack {
+          Anchor: (Width: 200, Height: 12);
+          Background: @TrackBg;
+        }
+
+        Label #AgilityValue {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @AgiColor);
+          Anchor: (Width: 80);
+          Text: "1";
+        }
+
+        TextButton #AgilityMinus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "-";
+        }
+
+        TextButton #AgilityPlus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "+";
+        }
+      }
+
+      Group #IntelligenceRow {
+        Anchor: (Height: 44, Top: 6);
+        LayoutMode: Left;
+        Background: @RowBg;
+        Padding: (Horizontal: 10, Vertical: 4);
+
+        Label {
+          Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @IntColor);
+          Anchor: (Width: 100);
+          Text: "Intelligence";
+        }
+
+        Group #IntelligenceTrack {
+          Anchor: (Width: 200, Height: 12);
+          Background: @TrackBg;
+        }
+
+        Label #IntelligenceValue {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @IntColor);
+          Anchor: (Width: 80);
+          Text: "1";
+        }
+
+        TextButton #IntelligenceMinus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "-";
+        }
+
+        TextButton #IntelligencePlus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "+";
+        }
+      }
+
+      Group #DefenseRow {
+        Anchor: (Height: 44, Top: 6);
+        LayoutMode: Left;
+        Background: @RowBg;
+        Padding: (Horizontal: 10, Vertical: 4);
+
+        Label {
+          Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @DefColor);
+          Anchor: (Width: 100);
+          Text: "Defense";
+        }
+
+        Group #DefenseTrack {
+          Anchor: (Width: 200, Height: 12);
+          Background: @TrackBg;
+        }
+
+        Label #DefenseValue {
+          Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @DefColor);
+          Anchor: (Width: 80);
+          Text: "1";
+        }
+
+        TextButton #DefenseMinus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "-";
+        }
+
+        TextButton #DefensePlus {
+          Anchor: (Width: 32, Height: 32);
+          Style: @BtnStyle;
+          Text: "+";
+        }
+      }
+
+      Group {
+        Anchor: (Height: 6, Top: 10);
+        Background: "Common/ContainerSectionSeparator.png";
+      }
+
+      Label {
+        Style: (FontSize: 12, TextColor: #5a6a7e);
+        Anchor: (Top: 6);
+        Text: "STR: Physical damage";
+      }
+
+      Label {
+        Style: (FontSize: 12, TextColor: #5a6a7e);
+        Anchor: (Top: 2);
+        Text: "DEX: Crit chance & crit damage";
+      }
+
+      Label {
+        Style: (FontSize: 12, TextColor: #5a6a7e);
+        Anchor: (Top: 2);
+        Text: "AGI: Dodge chance & move speed";
+      }
+
+      Label {
+        Style: (FontSize: 12, TextColor: #5a6a7e);
+        Anchor: (Top: 2);
+        Text: "INT: Mana regen & spell power";
+      }
+
+      Label {
+        Style: (FontSize: 12, TextColor: #5a6a7e);
+        Anchor: (Top: 2);
+        Text: "DEF: Reduces incoming damage";
+      }
+
+      Label #ClassBonus {
+        Style: (FontSize: 11, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentGold);
+        MaskTexturePath: "Common/TextGradient.png";
+        Anchor: (Top: 6);
+        Text: "";
       }
     }
 
     Group {
-      Anchor: (Height: 2, Top: 8);
-      Background: @AccentColor;
-    }
-
-    Label #LevelInfo {
-      Style: (FontSize: 13, HorizontalAlignment: Center, TextColor: #96a9be);
-      Anchor: (Top: 8);
-      Text: "Level 1 | 0 XP";
-    }
-
-    Label #AvailablePoints {
-      Style: (FontSize: 14, HorizontalAlignment: Center, RenderBold: true, TextColor: #a27e39);
-      Anchor: (Top: 4);
-      Text: "Available Points: 0";
-    }
-
-    Group {
-      Anchor: (Height: 1, Top: 10);
-      Background: @SeparatorColor;
-    }
-
-    Group #StrengthRow {
-      Anchor: (Height: 44, Top: 10);
-      LayoutMode: Left;
-      Background: @RowBg;
-      Padding: (Horizontal: 10, Vertical: 4);
-
-      Label {
-        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @StrColor);
-        Anchor: (Width: 100);
-        Text: "Strength";
-      }
-
-      Group #StrengthTrack {
-        Anchor: (Width: 200, Height: 12);
-        Background: @TrackBg;
-      }
-
-      Label #StrengthValue {
-        Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @StrColor);
-        Anchor: (Width: 80);
-        Text: "1";
-      }
-
-      TextButton #StrengthMinus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "-";
-      }
-
-      TextButton #StrengthPlus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "+";
-      }
-    }
-
-    Group #DexterityRow {
-      Anchor: (Height: 44, Top: 6);
-      LayoutMode: Left;
-      Background: @RowBg;
-      Padding: (Horizontal: 10, Vertical: 4);
-
-      Label {
-        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @DexColor);
-        Anchor: (Width: 100);
-        Text: "Dexterity";
-      }
-
-      Group #DexterityTrack {
-        Anchor: (Width: 200, Height: 12);
-        Background: @TrackBg;
-      }
-
-      Label #DexterityValue {
-        Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @DexColor);
-        Anchor: (Width: 80);
-        Text: "1";
-      }
-
-      TextButton #DexterityMinus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "-";
-      }
-
-      TextButton #DexterityPlus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "+";
-      }
-    }
-
-    Group #AgilityRow {
-      Anchor: (Height: 44, Top: 6);
-      LayoutMode: Left;
-      Background: @RowBg;
-      Padding: (Horizontal: 10, Vertical: 4);
-
-      Label {
-        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @AgiColor);
-        Anchor: (Width: 100);
-        Text: "Agility";
-      }
-
-      Group #AgilityTrack {
-        Anchor: (Width: 200, Height: 12);
-        Background: @TrackBg;
-      }
-
-      Label #AgilityValue {
-        Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @AgiColor);
-        Anchor: (Width: 80);
-        Text: "1";
-      }
-
-      TextButton #AgilityMinus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "-";
-      }
-
-      TextButton #AgilityPlus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "+";
-      }
-    }
-
-    Group #IntelligenceRow {
-      Anchor: (Height: 44, Top: 6);
-      LayoutMode: Left;
-      Background: @RowBg;
-      Padding: (Horizontal: 10, Vertical: 4);
-
-      Label {
-        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @IntColor);
-        Anchor: (Width: 100);
-        Text: "Intelligence";
-      }
-
-      Group #IntelligenceTrack {
-        Anchor: (Width: 200, Height: 12);
-        Background: @TrackBg;
-      }
-
-      Label #IntelligenceValue {
-        Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @IntColor);
-        Anchor: (Width: 80);
-        Text: "1";
-      }
-
-      TextButton #IntelligenceMinus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "-";
-      }
-
-      TextButton #IntelligencePlus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "+";
-      }
-    }
-
-    Group #DefenseRow {
-      Anchor: (Height: 44, Top: 6);
-      LayoutMode: Left;
-      Background: @RowBg;
-      Padding: (Horizontal: 10, Vertical: 4);
-
-      Label {
-        Style: (FontSize: 14, VerticalAlignment: Center, RenderBold: true, TextColor: @DefColor);
-        Anchor: (Width: 100);
-        Text: "Defense";
-      }
-
-      Group #DefenseTrack {
-        Anchor: (Width: 200, Height: 12);
-        Background: @TrackBg;
-      }
-
-      Label #DefenseValue {
-        Style: (FontSize: 14, HorizontalAlignment: Center, VerticalAlignment: Center, RenderBold: true, TextColor: @DefColor);
-        Anchor: (Width: 80);
-        Text: "1";
-      }
-
-      TextButton #DefenseMinus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "-";
-      }
-
-      TextButton #DefensePlus {
-        Anchor: (Width: 32, Height: 32);
-        Background: @BtnBg;
-        Text: "+";
-      }
-    }
-
-    Group {
-      Anchor: (Height: 1, Top: 10);
-      Background: @SeparatorColor;
-    }
-
-    Label {
-      Style: (FontSize: 12, TextColor: #5a6a7e);
-      Anchor: (Top: 6);
-      Text: "STR: Physical damage";
-    }
-
-    Label {
-      Style: (FontSize: 12, TextColor: #5a6a7e);
-      Anchor: (Top: 2);
-      Text: "DEX: Crit chance & crit damage";
-    }
-
-    Label {
-      Style: (FontSize: 12, TextColor: #5a6a7e);
-      Anchor: (Top: 2);
-      Text: "AGI: Dodge chance & move speed";
-    }
-
-    Label {
-      Style: (FontSize: 12, TextColor: #5a6a7e);
-      Anchor: (Top: 2);
-      Text: "INT: Mana regen & spell power";
-    }
-
-    Label {
-      Style: (FontSize: 12, TextColor: #5a6a7e);
-      Anchor: (Top: 2);
-      Text: "DEF: Reduces incoming damage";
-    }
-
-    Label #ClassBonus {
-      Style: (FontSize: 11, HorizontalAlignment: Center, RenderBold: true, TextColor: @AccentColor);
-      Anchor: (Top: 6);
-      Text: "";
+      Anchor: (Width: 236, Height: 11, Bottom: -6);
+      Background: "Common/ContainerDecorationBottom.png";
     }
   }
 }
